@@ -1,0 +1,33 @@
+@import 'root';
+
+body {
+   background-color: $dark;
+   font-family: $font-body;
+   font-size: $font-size-body;
+   color: $dark;
+}
+
+h1, h2{
+    font-family: $font-title;
+    font-size: $font-size-title;
+    color: $primary;
+}
+h3, h4, h5, h6{
+    font-family: $font-subtitle;
+    font-size: $font-size-subtitle;
+}
+
+li{
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+}
+.text-title{
+    font-family: $font-title;
+}
+.fs-1{
+    font-size: 3rem!important;
+}
+
+

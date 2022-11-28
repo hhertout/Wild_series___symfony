@@ -1,2 +1,13 @@
-<h1>Wild Series</h1>
-<a href="/program/">Voir les séries</a>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="home-main-content">
+    <div class="home-title-wrapper">
+        <div id="logo"></div>
+        <h1 class="text-primary">Wild Series</h1>
+    </div>
+    
+    <a href="/program/" class='home-link text-dark bg-primary'><span>Voir les séries<span></a>
+</section>
+{% endblock %}
+

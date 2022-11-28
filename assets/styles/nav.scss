@@ -1,0 +1,25 @@
+@import 'app';
+
+nav{
+    font-family: $font-subtitle;
+}
+.nav-link{
+    &:hover{
+        text-decoration: line-through;
+        color: #444;
+        rotate: -2deg;
+    }
+}
+
+.nav-desktop{
+    display: none;
+}
+
+@media screen and (min-width:900px) {
+    .nav-desktop{
+        display: flex;
+    }
+    .nav-mobile{
+        display: none;
+    }
+}
