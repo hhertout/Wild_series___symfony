@@ -5,7 +5,16 @@
     {% include './component/_navbar.html.twig' %}
 {% endblock %}
 {% block body %}
-<h1>{{ website }} index</h1>
+    <h3 class="text-primary">Toutes vos séries :</h3>
 
-<a href="{{ path('program_list', {id: 2}) }}">show</a>
+    {% for program in programs %}
+        <div class="text-light">
+            <h3 class="text-primary">{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h3>
+            <p>{{ program.synopsis }}</p>
+
+            <a href="{{ path("program_list", { id: program.id }) }}">Voir la fiche</a>
+        </div>
+
+    {% endfor %}
+
 {% endblock %}

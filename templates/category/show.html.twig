@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block navbar %}
+    {% include './component/_navbar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+{% if programs is not null %}
+
+    {% for program in programs %}
+
+        <div class="d-flex flex-column text-light">
+            <span>{{program.id}}</span>
+            <span>{{program.title}}</span>
+            <span>{{program.synopsis}}</span>
+            <span>{{program.category.name}}</span>
+            <a href="{{ path("program_list", { id: program.id }) }}">Voir la fiche</a>
+        </div>
+
+    {% endfor %}
+
+    {% else %}
+
+    <div><h4 class="text-primary">Aucune série n'a été trouvée !</h4></div>
+
+{% endif %}
+   
+   
+
+{% endblock %}

@@ -1,10 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wild Series{% endblock %}
+{% block title %}Série #{{ program.id }}{% endblock %}
 {% block navbar %}
     {% include './component/_navbar.html.twig' %}
 {% endblock %}
 {% block body %}
-<h1>Series</h1>
-<p>{{id}}</p>
+    <div class="media">
+        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <div class="media-body">
+            <h4 class="mt-0 text-primary">{{ program.title }}</h4>
+            <p class="text-light">{{ program.synopsis }}</p>
+            <p class="text-light">Catégorie : {{ program.category.name }}</p>
+        </div>
+    </div>
+
+    <a href="{{ path('program_index') }}">
+        Retour à la liste des programmes
+    </a>
 {% endblock %}
