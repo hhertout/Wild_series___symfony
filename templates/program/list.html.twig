@@ -5,22 +5,36 @@
     {% include './component/_navbar.html.twig' %}
 {% endblock %}
 {% block body %}
-    <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster ?? asset('build/images/placeholder.jpg')}}" alt="{{ program.title }} poster">
-        <div class="media-body">
-            <h4 class="mt-0 text-primary">{{ program.title }}</h4>
-            <p class="text-light">{{ program.synopsis }}</p>
-            <p class="text-light">Catégorie : {{ program.category.name }}</p>
-            <div class="text-light ">
-                <span>Liste des saisons disponibles :</span>
+    <div class="container-xxl bg-light p-0">
+        
+        <div class="d-flex justify-content-center align-items-center bg-primary">
+            <img class="w-50 align-self-start mr-3" src="{{program.poster ?? asset('build/images/placeholder.jpg')}}" alt="{{ program.title }} poster">
+            <h4 class="w-50 mt-0 text-dark">{{ program.title }}</h4>
+        </div>
+
+        <div class="p-4">
+            <div>
+                <p class="text-subtitle fs-2">Catégorie : {{ program.category.name }}</p>
+            </div>
+            <div>
+                <p class="text-subtitle fs-3">Synopsis:</p>
+                <p class="">{{ program.synopsis }}</p>
+            </div>
+           
+           
+            <div class="">
+                <p class="text-subtitle fs-3">Liste des saisons disponibles :</p>
                 {% for season in program.seasons %}
-                    <a class="link-seasons p-2 text-light" href="/program/{{program.id}}/season/{{season.id}}">{{season.number}}</a>
+                    <a class="link-seasons text-dark p-2" href="/program/{{program.id}}/season/{{season.id}}">{{season.number}}</a>
                 {% endfor %}
             </div>
-        </div>
+        </div>    
+    
     </div>
 
-    <a href="{{ path('program_index') }}">
-        Retour à la liste des programmes
-    </a>
+    <div class="container-xxl bg-primary d-flex justify-content-center">
+        <a class="nav-link text-dark p-5 text-subtitle" href="{{ path('program_index') }}">
+            Retour à la liste des programmes
+        </a>
+    </div>
 {% endblock %}

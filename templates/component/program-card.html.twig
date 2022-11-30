@@ -19,7 +19,7 @@
                     <div>
                         <div class="text-subtitle">Liste des saisons</div>
                         {% if program.seasons is not empty %}
-                        {% for season in program.seasons %}
+                        {% for season in program.seasons|sort((a, b) => a.number <=> b.number) %}
                             <a class="link-seasons text-dark p-2" href="/program/{{program.id}}/season/{{season.id}}">{{season.number}}</a>
                         {% endfor %}
                         {% else %}

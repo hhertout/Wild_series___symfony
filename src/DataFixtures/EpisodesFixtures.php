@@ -19,7 +19,7 @@ class EpisodesFixtures extends Fixture implements DependentFixtureInterface
         * de te générer toutes les données que tu souhaites
         */
         for($j = 0; $j < 5 ; $j++){
-            for($i = 0; $i < (count(CategoryFixtures::CATEGORIES) * ProgramFixtures::PROGRAM_LOOP * 5); $i++) {
+            for($i = 0; $i < (count(CategoryFixtures::CATEGORIES) * ProgramFixtures::PROGRAM_LOOP * SeasonsFixtures::SEASON_PER_PROGRAM); $i++) {
                 $episode = new Episode();
                 //Ce Faker va nous permettre d'alimenter l'instance de episode que l'on souhaite ajouter en base
                 $episode->setNumber($faker->numberBetween(1, 10));
