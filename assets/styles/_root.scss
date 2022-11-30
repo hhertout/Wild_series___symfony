@@ -13,15 +13,16 @@
 
 $primary: #FCEE0A;
 $secondary: #00F0FF;
-$terciary : #FF1CF6;
+$terciary : #d509cf;
 $light: #F1F1F1;
 $dark: #333333;
 
 $font-title: 'Cyberpunk';
 $font-subtitle: 'Blender-Pro-Bold';
 $font-body: 'Blender-Reg';
-$font-size-body: 1.2rem;
+$font-size-body: 1.3rem;
 $font-size-title: 4rem;
 $font-size-subtitle: 2rem;
+
 
 @import "~bootstrap/scss/bootstrap";

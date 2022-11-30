@@ -5,16 +5,9 @@
     {% include './component/_navbar.html.twig' %}
 {% endblock %}
 {% block body %}
-    <h3 class="text-primary">Toutes vos séries :</h3>
-
-    {% for program in programs %}
-        <div class="text-light">
-            <h3 class="text-primary">{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h3>
-            <p>{{ program.synopsis }}</p>
-
-            <a href="{{ path("program_list", { id: program.id }) }}">Voir la fiche</a>
-        </div>
-
-    {% endfor %}
+<div class="p-2 container-xxl">
+    <h3 class="text-primary mt-5 mb-5">Toutes les séries :</h3>
+    {% include 'component/program-card.html.twig' %}
+</div>
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
 use App\Entity\Program;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -9,15 +10,22 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const PROGRAM_LOOP = 5; 
+
     public function load(ObjectManager $manager): void
     {
+        $j=1;
         foreach(CategoryFixtures::CATEGORIES as $category){
-            for($i = 0 ; $i < 5 ; $i++){
+            for($i = 1 ; $i <= 5 ; $i++){
+                $faker = Factory::create();
+
                 $program = new Program();
-                $program->setTitle('Titre du film ' . $i);
-                $program->setSynopsis('Ceci est une super description, obtenue en bouclant sur des fixtures et des jointures en BDD. Le tout fonctionne aux petits oignons');
+                $program->setTitle($faker->sentence(3, true));
+                $program->setSynopsis($faker->paragraph(2));
                 $program->setCategory($this->getReference('category_' . $category));
+                $this->addReference('program_' . $j, $program);
                 $manager->persist($program);
+                $j++;
             }
         }
         $manager->flush();

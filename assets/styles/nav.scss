@@ -9,4 +9,15 @@ nav{
         color: #444;
         rotate: -3deg;
     }
+    .dropdown-item{
+        &:hover{
+            background-color: $terciary!important;
+        }
+    }
+    
+}
+.nav-mobile{
+    li {
+        width: 20%;
+    }
 }

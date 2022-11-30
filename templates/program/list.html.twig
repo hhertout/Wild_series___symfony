@@ -6,11 +6,17 @@
 {% endblock %}
 {% block body %}
     <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <img class="align-self-start mr-3" src="{{program.poster ?? asset('build/images/placeholder.jpg')}}" alt="{{ program.title }} poster">
         <div class="media-body">
             <h4 class="mt-0 text-primary">{{ program.title }}</h4>
             <p class="text-light">{{ program.synopsis }}</p>
             <p class="text-light">Catégorie : {{ program.category.name }}</p>
+            <div class="text-light ">
+                <span>Liste des saisons disponibles :</span>
+                {% for season in program.seasons %}
+                    <a class="link-seasons p-2 text-light" href="/program/{{program.id}}/season/{{season.id}}">{{season.number}}</a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

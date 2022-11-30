@@ -7,27 +7,18 @@
 {% endblock %}
 
 {% block body %}
+<div class="p-2 container">
 
-{% if programs is not null %}
+    {% if programs is not null %}
 
-    {% for program in programs %}
+            {% include 'component/program-card.html.twig' %}
 
-        <div class="d-flex flex-column text-light">
-            <span>{{program.id}}</span>
-            <span>{{program.title}}</span>
-            <span>{{program.synopsis}}</span>
-            <span>{{program.category.name}}</span>
-            <a href="{{ path("program_list", { id: program.id }) }}">Voir la fiche</a>
-        </div>
+        {% else %}
 
-    {% endfor %}
+        <div><h4 class="text-primary">Aucune série n'a été trouvée !</h4></div>
 
-    {% else %}
-
-    <div><h4 class="text-primary">Aucune série n'a été trouvée !</h4></div>
-
-{% endif %}
-   
+    {% endif %}
    
 
+</div>
 {% endblock %}
