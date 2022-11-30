@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body %}
 
-<div class="container card-episode bg-secondary p-0 py-3">
+<div class="container card-episode bg-secondary p-0 py-3 my-5">
     <h3 class="fs-1 bg-primary py-4 container-fluid text-center">{{ program.title }}</h3>
     <div class="px-4">
         <h4 class="p-2">Liste des épisodes</h4>
@@ -16,8 +16,8 @@
             {% for episode in season.episodes|sort((a, b) => a.number <=> b.number) %}
                 <div class="col-12">
                     <div class="bg-light p-4">
-                        <h4>{{ episode.title }}</h4>
                         <p class="text-subtitle"><u>Episode n°{{ episode.number }}:</u><p>
+                        <h4>{{ episode.title }}</h4>
                         <div>
                             <p class="text-subtitle">Synopsis:</p>
                             <p>{{ episode.synopsis }}<p>
