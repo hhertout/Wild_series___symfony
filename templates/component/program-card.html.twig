@@ -5,9 +5,9 @@
             <div class="card-film text-dark py-5 h-100 d-flex flex-column flex-between">
             
                 
-                <div class="card-title-wrapper d-flex align-items-center bg-primary container-fluid m-0 mt-3">
-                    <img src="{{ asset('build/images/placeholder.jpg') }}" alt="placeholder" class="card-img">
-                    <h3 class="fs-2">{{ program.title }}</h3>
+                <div class="card-title-wrapper d-flex align-items-center bg-primary container-fluid p-0 m-0 mt-3">
+                    <img src="{{ program.poster ?? asset('build/images/placeholder.jpg') }}" alt="placeholder" class="card-img">
+                    <h3 class="fs-2 p-3">{{ program.title }}</h3>
                 </div>
             
                 <div class="mt-2 p-3 h-50">
@@ -20,7 +20,7 @@
                         <div class="text-subtitle">Liste des saisons</div>
                         {% if program.seasons is not empty %}
                         {% for season in program.seasons|sort((a, b) => a.number <=> b.number) %}
-                            <a class="link-seasons text-dark p-2" href="/program/{{program.id}}/season/{{season.id}}">{{season.number}}</a>
+                            <a class="link-seasons text-dark p-2" href="{{ path("program_season_show", {"program": program.id, "season": season.id })}}">{{season.number}}</a>
                         {% endfor %}
                         {% else %}
                             <div>Aucune saison disponible</div>

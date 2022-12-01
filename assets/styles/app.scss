@@ -11,6 +11,9 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
+
+    margin-block-end: 7rem;
+    margin-block-start: 7rem;
 }
 
 h1, h2{
@@ -37,6 +40,11 @@ a {
 }
 .fs-1{
     font-size: 3rem!important;
+}
+
+.custom-link{
+    width: 15rem;
+    clip-path: polygon(5% 0, 95% 0, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0 95%, 0 5%);
 }
 
 .card-film {
@@ -70,5 +78,11 @@ a {
     }
 }
 
+@media screen and (min-width:1200px) {
+    body{
+        margin-block-end: 0;
+        margin-block-start: 0;
+    }
+}
 
 

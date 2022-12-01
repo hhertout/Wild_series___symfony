@@ -1,6 +1,6 @@
-<nav class="d-none d-xl-flex navbar navbar-expand-lg bg-primary justify-content-between align-items-center py-3 px-3 mb-4 nav-desktop">
+<nav class="d-none d-xl-flex navbar bg-primary justify-content-between align-items-center py-3 px-3 mb-4 nav-desktop">
   
-      <a href="/"><h1 class="text-dark fs-1">Wild Series</h1></a>
+      <a href="{{ path('program_index')}}"><h1 class="text-dark fs-1">Wild Series</h1></a>
     
       <ul class="d-flex justify-content-center align-items-center m-0 fs-4">
         <li class="nav-item dropdown px-3">
@@ -8,6 +8,8 @@
             Catégories
           </a>
           <ul class="dropdown-menu bg-primary">
+            <li><a class="dropdown-item fs-4" href="{{ path('category_index') }}">Toutes les catégories</a></li>
+            <li><div class="dropdown-divider"></div></li>
             {% for category in categories %}
             <li><a class="dropdown-item fs-4" href="{{ path('category_show', {categoryName: category.name}) }}">{{ category.name }}</a></li>
             {% endfor %}
@@ -41,53 +43,59 @@
 
 </nav>
 
+<div class="d-flex d-xl-none container-fluid fixed-top bg-primary py-3 px-3">
+  <div>
+    <h1 class="text-dark fs-1">Wild Series</h1>
+  </div>
+</div>
+
 <nav class="d-flex d-xl-none nav-mobile fixed-bottom navbar navbar-expand-lg bg-primary justify-content-between align-items-center py-2">
        <ul class="container-fluid justify-content-evenly align-items-center m-0 fs-2">
 
-          <li class="p-2">
-            <a href="/program/" class="nav-link d-flex flex-column justify-content-center align-items-center">
+          <li class="py-2">
+            <a href="{{ path('program_index')}}" class="nav-link d-flex flex-column justify-content-center align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                   <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
                   <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
                 </svg>
-                <span class="fs-5 mt-2">Accueil</span>
+                <span class="fs-6 mt-2">Accueil</span>
             </a>
           </li>
 
-          <li class="p-2">
+          <li class="py-2">
             <a href="#" class="nav-link d-flex flex-column justify-content-center align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat-square-heart-fill" viewBox="0 0 16 16">
                   <path d="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Zm6 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
                 </svg>
-                <span class="fs-5 mt-2">Favoris</span>
+                <span class="fs-6 mt-2">Favoris</span>
             </a>
           </li>
 
-          <li class="p-2">
+          <li class="py-2">
             <a href="/category/" class="nav-link d-flex flex-column justify-content-center align-items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-display-fill" viewBox="0 0 16 16">
                 <path d="M6 12c0 .667-.083 1.167-.25 1.5H5a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-.75c-.167-.333-.25-.833-.25-1.5h4c2 0 2-2 2-2V4c0-2-2-2-2-2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h4z"/>
               </svg>
-              <span class="fs-5 mt-2">Catégories</span>
+              <span class="fs-6 mt-2">Catégories</span>
             </a>
           </li>
 
-          <li class="p-2">
+          <li class="py-2">
             <a href="#" class="nav-link d-flex flex-column justify-content-center align-items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-badge-fill" viewBox="0 0 16 16">
                 <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
               </svg>
-              <span class="fs-5 mt-2">Acteurs</span>
+              <span class="fs-6 mt-2">Acteurs</span>
             </a>
           </li>
 
-          <li class="p-2">
+          <li class="py-2">
             <a href="#" class="nav-link d-flex flex-column justify-content-center align-items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
               </svg>
-              <span class="fs-5 mt-2 text-center">Mon Compte</span>
+              <span class="fs-6 mt-2 text-center">Mon Compte</span>
             </a>
           </li>
 

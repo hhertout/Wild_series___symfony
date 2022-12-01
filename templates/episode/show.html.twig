@@ -1,0 +1,34 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}Episode{% endblock %}
+
+{% block body %}
+    <h4>Episode</h4>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ episode.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ episode.title }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ episode.number }}</td>
+            </tr>
+            <tr>
+                <th>Synopsis</th>
+                <td>{{ episode.synopsis }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="w-100 h-100 btn bg-primary text-subtitle my-2 p-3" href="{{ path('app_episode_index') }}">Retour</a>
+
+    <a class="w-100 h-100 btn bg-primary text-subtitle my-2 p-3" href="{{ path('app_episode_edit', {'id': episode.id}) }}">Modifier</a>
+
+    {{ include('episode/_delete_form.html.twig') }}
+{% endblock %}

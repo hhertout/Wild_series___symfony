@@ -5,10 +5,16 @@
     {% include './component/_navbar.html.twig' %}
 {% endblock %}
 {% block body %}
-    <h3 class="text-primary">Toutes les catégories :</h3>
+<div class="container-xxl p-4">
 
     {% for category in categories %}
-    <a href= {{ path('category_show', {categoryName: category.name } )}} >{{ category.name }}</a>
+
+    <div class="d-flex flex-column justify-content-center align-items-center g-2">
+        <a class="custom-link text-subtitle text-center text-dark bg-primary my-2 p-4" href= {{ path('category_show', {categoryName: category.name } )}} >{{ category.name }}</a>
+    </div>
+    
     {% endfor %}
 
+</div>
+    
 {% endblock %}

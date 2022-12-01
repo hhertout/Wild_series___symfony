@@ -1,0 +1,39 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}Episode index{% endblock %}
+
+{% block body %}
+    <h4>Episode index</h4>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-subtitle">Id</th>
+                <th class="text-subtitle">Title</th>
+                <th class="text-subtitle">Number</th>
+                <th class="text-subtitle">Synopsis</th>
+                <th class="text-subtitle">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for episode in episodes %}
+            <tr>
+                <td>{{ episode.id }}</td>
+                <td>{{ episode.title }}</td>
+                <td>{{ episode.number }}</td>
+                <td>{{ episode.synopsis }}</td>
+                <td>
+                    <a class="w-100 h-100 btn bg-primary text-subtitle my-2 p-3" href="{{ path('app_episode_show', {'id': episode.id}) }}">show</a>
+                    <a class="w-100 h-100 btn bg-primary text-subtitle my-2 p-3" href="{{ path('app_episode_edit', {'id': episode.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="w-100 h-100 btn bg-primary text-subtitle my-2 p-3" href="{{ path('app_episode_new') }}">Create new</a>
+{% endblock %}
