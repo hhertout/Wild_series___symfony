@@ -25,7 +25,7 @@ class Season
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class)]
+    #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class, orphanRemoval: true)]
     private Collection $episodes;
 
     #[ORM\ManyToOne(inversedBy: 'seasons')]

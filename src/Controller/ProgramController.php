@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Season;
 use App\Entity\Program;
 use App\Form\ProgramType;
-use App\Repository\SeasonRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
