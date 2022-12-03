@@ -1,60 +1,71 @@
-@import 'app';
+@import "app";
 
-.home-main-content{
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    min-height: 800px;
-    overflow: hidden;
-    background-image: url(../images/bg-cyber.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.home-main-content {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 800px;
+  overflow: hidden;
+  background-image: url(../images/bg-cyber.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.home-title-wrapper{
-    width: 650px;
-    height: 400px;
-    backdrop-filter: blur(10px);
+.home-title-wrapper {
+  width: 650px;
+  height: 400px;
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 20px;
+
+  h1 {
+    font-size: 7rem;
     position: absolute;
-    top: 35%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    border-radius: 20px;
-
-    h1{
-        font-size: 7rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-    #logo{
-        font-family: $font-subtitle;
-        font-size: $font-size-subtitle;
-        font-weight: bolder;
-        width: 50%;
-        height: 60%;
-        background-image: url(../images/cybertest.svg);
-        background-repeat: no-repeat;
-        transform-origin: center;
-        transform: translate(-30%, -30%);
-    }
-}
-.home-link{
+    text-align: center;
+  }
+  #logo {
     font-family: $font-subtitle;
-    font-size: 2rem;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    padding: 3rem;
-    transform: translate(-50%, -50%);
-    clip-path: polygon(40% 9%, 55% 0, 100% 0, 100% 90%, 55% 90%, 40% 100%, 0 100%, 0 9%);
-
-    &:hover{
-        text-decoration: line-through;
-        color: #777;
-    }
+    font-size: $font-size-subtitle;
+    font-weight: bolder;
+    width: 50%;
+    height: 60%;
+    background-image: url(../images/cybertest.svg);
+    background-repeat: no-repeat;
+    transform-origin: center;
+    transform: translate(-30%, -30%);
+  }
 }
+.home-link {
+  font-family: $font-subtitle;
+  font-size: 2rem;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  padding: 3rem;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(
+    40% 9%,
+    55% 0,
+    100% 0,
+    100% 90%,
+    55% 90%,
+    40% 100%,
+    0 100%,
+    0 9%
+  );
+
+  &:hover {
+    text-decoration: line-through;
+    color: #777;
+  }
+}
+
+

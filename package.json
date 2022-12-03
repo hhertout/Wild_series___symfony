@@ -24,6 +24,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "gsap": "^3.11.3",
         "sass": "^1.56.1",
         "sass-loader": "^13.2.0"
     }
