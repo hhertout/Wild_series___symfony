@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepository->save($category, true); 
 
             return $this->redirectToRoute('category_index');
