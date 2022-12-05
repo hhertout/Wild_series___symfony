@@ -26,7 +26,7 @@ import { gsap } from "gsap";
 
 const tl = gsap.timeline({
     repeat: -1, 
-    repeatDelay: Math.random() * 7
+    repeatDelay: 1 + Math.random() * 4
 });
 
 tl.to('.glitch', {
@@ -78,12 +78,12 @@ tl.to('.glitch', {
 }, "+=0.02")
 
 .to('.top', {
-    duration: 0.02,
+    duration: 0.05,
     x:0,
     ease: "rough({ template: none.out, strength: 1, points: 20, taper: none, randomize: true, clamp: false})"
 })
 .to('.bottom', {
-    duration: 0.02,
+    duration: 0.05,
     x:0,
     ease: "rough({ template: none.out, strength: 1, points: 20, taper: none, randomize: true, clamp: false})"
 })

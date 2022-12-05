@@ -11,15 +11,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProgramController extends AbstractController
 {
     #[Route('/program/', name: 'program_index')]
     public function index(
         ProgramRepository $programRepository, 
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        RequestStack $requestStack,
         ): Response
     {
+        $requestStack->getSession();
         $categories = $categoryRepository->findAll();
         $programs = $programRepository->findAll();
 
@@ -32,9 +35,12 @@ class ProgramController extends AbstractController
     public function new(
         CategoryRepository $categoryRepository, 
         ProgramRepository $programRepository, 
-        Request $request
+        Request $request,
+        RequestStack $requestStack,
         ): Response
     {
+        $requestStack->getSession();
+        
         $categories = $categoryRepository->findAll();
 
         $program = new Program();
@@ -45,6 +51,8 @@ class ProgramController extends AbstractController
 
         if ($form->isSubmitted()) {
             $programRepository->save($program, true); 
+
+            $this->addFlash('succes', 'Le nouveau programme à été crée');
 
             return $this->redirectToRoute('program_index');
         }

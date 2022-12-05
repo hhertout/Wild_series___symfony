@@ -29,6 +29,13 @@
         {% endblock %}
         
         <main class="bg-light text-dark container p-4 rounded my-5">
+        {% for category, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="bg-primary alert alert-{{ category }} text-{{category}}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
             {% block body %}
             {% endblock %}
         </main>
