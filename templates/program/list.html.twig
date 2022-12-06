@@ -20,6 +20,17 @@
                 <p class="text-subtitle fs-3">Synopsis:</p>
                 <p class="">{{ program.synopsis }}</p>
             </div>
+                <strong>Acteurs :</strong>
+                <ul>
+                    {% for actor in program.actors %}
+                        <li><a class="link-seasons text-dark p-2" href={{ path('actor_show', {id :actor.id}) }}>{{ actor.name }}</a></li>
+                    {% else %}
+                        <li>Aucun acteur pour cette série</li>
+                    {% endfor %}
+                </ul>
+            <div>
+            </div>
+            
            
            
             <div class="">

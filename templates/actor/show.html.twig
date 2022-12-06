@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wild Series{% endblock %}
+{% block navbar %}
+    {% include './component/_navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+<div class="container-xxl p-4">
+    <div class="bg-primary p-4">
+    <div class="text-subtitle fs-1">
+        <span>{{actor.name}}</span>
+    </div>
+    <div class="text-subtitle fs-3">Série :</div>
+    {% for program in actor.programs %}
+        <a class="link-seasons text-dark p-2" href={{ path('program_list',{ id: program.id }) }}>{{program.title}}</div>
+    {% endfor %}
+    </div>
+</div>    
+{% endblock %}

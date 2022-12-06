@@ -13,17 +13,12 @@ class SeasonsFixtures extends Fixture implements DependentFixtureInterface
     public const SEASON_PER_PROGRAM = 5;
     public function load(ObjectManager $manager): void
     {
-        //Puis ici nous demandons à la Factory de nous fournir un Faker
         $faker = Factory::create();
-        /**
-        * L'objet $faker que tu récupère est l'outil qui va te permettre 
-        * de te générer toutes les données que tu souhaites
-        */
+
         $loopIndex = 0;
         for($j = 0; $j < self::SEASON_PER_PROGRAM ; $j++){
             for($i = 0; $i < (count(CategoryFixtures::CATEGORIES) * ProgramFixtures::PROGRAM_LOOP) ; $i++) {
                 $season = new Season();
-                //Ce Faker va nous permettre d'alimenter l'instance de Season que l'on souhaite ajouter en base
                 $season->setNumber($faker->randomDigitNotNull());
                 $season->setYear($faker->year());
                 $season->setDescription($faker->paragraphs(3, true));
