@@ -6,11 +6,17 @@ use Faker\Factory;
 use App\Entity\Program;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
     public const PROGRAM_LOOP = 5; 
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
 
     public function load(ObjectManager $manager): void
     {
@@ -20,7 +26,10 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
                 $faker = Factory::create();
 
                 $program = new Program();
-                $program->setTitle($faker->sentence(3, true));
+                $title = $faker->sentence(3, true);
+                $slug = $this->slugger->slug($title);
+                $program->setSlug($slug);
+                $program->setTitle($title);
                 $program->setSynopsis($faker->paragraph(2));
                 $program->setCategory($this->getReference('category_' . $category));
                 $this->addReference('program_' . $j, $program);

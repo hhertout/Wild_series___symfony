@@ -6,7 +6,7 @@
             
                 
                 <div class="card-title-wrapper d-flex align-items-center bg-primary container-fluid p-0 m-0 mt-3">
-                    <img src="{{ program.poster ?? asset('build/images/placeholder.jpg') }}" alt="placeholder" class="card-img">
+                    <img src="{{ program.poster ?? asset('build/images/got.jpg') }}" alt="placeholder" class="card-img">
                     <h3 class="fs-2 p-3">{{ program.title }}</h3>
                 </div>
             
@@ -20,7 +20,7 @@
                         <div class="text-subtitle">Liste des saisons</div>
                         {% if program.seasons is not empty %}
                         {% for season in program.seasons|sort((a, b) => a.number <=> b.number) %}
-                            <a class="link-seasons text-dark p-2" href="{{ path("program_season_show", {"program": program.id, "season": season.id })}}">{{season.number}}</a>
+                            <a class="link-seasons text-dark p-2" href="{{ path("program_season_show", {"slug": program.slug, "season": season.id })}}">{{season.number}}</a>
                         {% endfor %}
                         {% else %}
                             <div>Aucune saison disponible</div>
@@ -29,7 +29,7 @@
 
                 </div>
 
-                <a href="{{ path("program_list", { id: program.id }) }}" class="card-show-more text-dark mb-3 align-self-end p-2 px-3 mt-3 me-2 d-flex align-items-center">
+                <a href="{{ path("program_list", { slug: program.slug }) }}" class="card-show-more text-dark mb-3 align-self-end p-2 px-3 mt-3 me-2 d-flex align-items-center">
                     <span class="me-2 fs-4">Voir la fiche</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
                         <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>

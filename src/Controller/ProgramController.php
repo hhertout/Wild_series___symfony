@@ -7,11 +7,13 @@ use App\Entity\Program;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
+use App\Service\ProgramDuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProgramController extends AbstractController
 {
@@ -37,6 +39,7 @@ class ProgramController extends AbstractController
         ProgramRepository $programRepository, 
         Request $request,
         RequestStack $requestStack,
+        SluggerInterface $slugger
         ): Response
     {
         $requestStack->getSession();
@@ -44,16 +47,15 @@ class ProgramController extends AbstractController
         $categories = $categoryRepository->findAll();
 
         $program = new Program();
-
         $form = $this->createForm(ProgramType::class, $program);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $programRepository->save($program, true); 
+            $programRepository->save($program, true);
+            $slug = $slugger->slug($program->getTitle());
+            $program->setSlug($slug);
 
             $this->addFlash('succes', 'Le nouveau programme à été crée');
-
             return $this->redirectToRoute('program_index');
         }
 
@@ -62,18 +64,24 @@ class ProgramController extends AbstractController
             'categories' => $categories,
         ]);
     }
-    #[Route('/program/{id}/', requirements: ['id'=>'\d+'], name: 'program_list')]
-    public function showProgram(int $id, Program $program, CategoryRepository $categoryRepository): Response
+    #[Route('/program/{slug}/', requirements: ['id'=>'\d+'], name: 'program_list')]
+    public function showProgram(
+        string $slug, 
+        Program $program, 
+        CategoryRepository $categoryRepository,
+        ProgramDuration $programDuration
+        ): Response
     {
         $categories = $categoryRepository->findAll();
 
         return $this->render('program/list.html.twig', [
-            'id' => $id,
+            'id' => $slug,
             'program' => $program,
             'categories' => $categories,
+            'programDuration' => $programDuration->calculate($program)
         ]);
     }
-    #[Route('/program/{program}/season-show/{season}/', requirements: ['id'=>'\d+'], name: 'program_season_show')]
+    #[Route('/program/{slug}/season-show/{season}/', requirements: ['id'=>'\d+'], name: 'program_season_show')]
     public function showSeasons( 
         Program $program, 
         Season $season, 
