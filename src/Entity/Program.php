@@ -27,7 +27,6 @@ class Program
     private ?string $synopsis = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]
     #[Assert\Length(max:255)]
     private ?string $poster = null;
 
