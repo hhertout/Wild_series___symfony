@@ -23,6 +23,7 @@
                             <p>{{ episode.synopsis }}<p>
                         </div>
                     </div>
+                <a class="btn bg-primary text-subtitle my-2 p-3" href="{{ path('episode_show', {"slug": program.slug, "season": season.id, "episode":episode.id}) }}">Voir</a>
                 </div>
             {% endfor %}
         {% else %}

@@ -2,10 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Entity\Season;
 use App\Entity\Episode;
+use App\Entity\Program;
+use App\Form\CommentType;
 use App\Form\EpisodeType;
 use Symfony\Component\Mime\Email;
 use App\Repository\EpisodeRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +22,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/episode')]
 class EpisodeController extends AbstractController
 {
+    #[Route('/{slug}/season-show/{season}/{episode}', requirements: ['id'=>'\d+'], name: 'episode_show')]
+    public function showEpisode( 
+        Program $program,
+        Season $season,
+        Episode $episode, 
+        CategoryRepository $categoryRepository,
+        CommentRepository $commentRepository,
+        Request $request
+        )
+    {      
+        $categories = $categoryRepository->findAll();
+        $comments = $commentRepository->findby([ 'episode' => $episode->getId()]);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setAuthor($this->getUser());
+            $comment->setEpisode($episode);
+            $commentRepository->save($comment, true);
+
+            $this->addFlash('succes', 'Votre commentaire est désormais en ligne');
+            return $this->redirectToRoute('episode_show', [
+                'episode' => $episode->getId(),
+                'season' => $season->getId(),
+                'slug' => $program->getSlug()
+            ]);
+        }
+
+        return $this->renderForm('episode/visitorShow.html.twig', [
+            'comments' => $comments,
+            'episode' => $episode,
+            'categories' => $categories,
+            'season' => $season,
+            'program' => $program,
+            'form' => $form
+        ]);
+    }
     #[Route('/', name: 'app_episode_index', methods: ['GET'])]
     public function index(EpisodeRepository $episodeRepository): Response
     {

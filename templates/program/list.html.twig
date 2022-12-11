@@ -35,7 +35,7 @@
            
             <div class="">
                 <p class="text-subtitle fs-3">Liste des saisons disponibles :</p>
-                {% for season in program.seasons %}
+                {% for season in program.seasons|sort((a, b) => a.number <=> b.number) %}
                     <a class="link-seasons text-dark p-2" href="{{ path("program_season_show", {"slug": program.slug, "season": season.id })}}">{{season.number}}</a>
                 {% endfor %}
             </div>

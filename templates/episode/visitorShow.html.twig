@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Episode{% endblock %}
+{% block navbar %}
+    {% include './component/_navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+<div class="container-xxl bg-light p-0">
+        
+        <div class="d-flex justify-content-center align-items-center bg-primary">
+            
+            <h4 class="w-50 mt-0 text-dark p-3">{{ episode.title }}</h4>
+        </div>
+        
+        <div class="p-4">
+            <div>
+                <p class="text-subtitle fs-2">Episode n°{{ episode.number }}</p>
+            </div>
+            <div>
+                <p class="text-subtitle fs-3">Synopsis:</p>
+                <p class="">{{ episode.synopsis }}</p>       
+            </div>
+            
+        </div> 
+        
+    
+        <div class="p-4 w-50">
+            {% if app.user %}
+
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn bg-primary text-subtitle my-2 p-3" type="submit">Ajouter un commentaire</button>
+                {{ form_end(form) }}
+
+            {% endif %}
+        </div>
+
+        <div class="p-4">
+            <div class="text-subtitle fs-2">Commentaires :</div>
+            {% for comment in comments %}
+            <div class="bg-dark text-light p-2 my-4 rounded">
+                <p class="blockquote">{{comment.comment}}</p>
+                <div class="blockquote-footer text-primary">{{comment.author.firstname}} {{comment.author.lastname}}</div>
+            </div>
+            {% endfor %}
+        </div>   
+    </div>
+
+
+    <div class="container-xxl bg-primary d-flex justify-content-center">
+        <a class="nav-link text-dark p-5 text-subtitle" href="{{ path('program_season_show', {"slug": program.slug, "season": season.id }) }}">
+            Retour
+        </a>
+    </div>
+{% endblock %}
