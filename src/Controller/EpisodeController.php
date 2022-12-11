@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
+use DateTime;
 use App\Entity\Season;
+use DateTimeInterface;
+use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Form\CommentType;
 use App\Form\EpisodeType;
 use Symfony\Component\Mime\Email;
+use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,8 +41,10 @@ class EpisodeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new DateTime();
             $comment->setAuthor($this->getUser());
             $comment->setEpisode($episode);
+            $comment->setCreationDate($date);
             $commentRepository->save($comment, true);
 
             $this->addFlash('succes', 'Votre commentaire est désormais en ligne');
