@@ -17,9 +17,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/program')]
 class ProgramController extends AbstractController
 {
-    #[Route('/program/', name: 'program_index')]
+    #[Route('/', name: 'program_index')]
     public function index(
         ProgramRepository $programRepository, 
         CategoryRepository $categoryRepository,
@@ -35,7 +36,7 @@ class ProgramController extends AbstractController
             'categories' => $categories
         ]);
     }
-    #[Route('/program/new', name: 'new')]
+    #[Route('/new', name: 'new')]
     public function new(
         CategoryRepository $categoryRepository, 
         ProgramRepository $programRepository, 
@@ -75,7 +76,7 @@ class ProgramController extends AbstractController
             'categories' => $categories,
         ]);
     }
-    #[Route('/program/{slug}/', requirements: ['id'=>'\d+'], name: 'program_list')]
+    #[Route('/{slug}/', requirements: ['id'=>'\d+'], name: 'program_list')]
     public function showProgram(
         string $slug, 
         Program $program, 
@@ -92,7 +93,7 @@ class ProgramController extends AbstractController
             'programDuration' => $programDuration->calculate($program)
         ]);
     }
-    #[Route('/program/{slug}/season-show/{season}/', requirements: ['id'=>'\d+'], name: 'program_season_show')]
+    #[Route('/{slug}/season-show/{season}/', requirements: ['id'=>'\d+'], name: 'program_season_show')]
     public function showSeasons( 
         Program $program, 
         Season $season, 

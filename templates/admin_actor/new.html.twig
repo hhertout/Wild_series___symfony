@@ -1,0 +1,11 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}New Actor{% endblock %}
+
+{% block body %}
+    <h1>Create new Actor</h1>
+
+    {{ include('admin_actor/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_actor_index') }}">back to list</a>
+{% endblock %}

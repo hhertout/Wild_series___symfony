@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\ProgramRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
+use App\Entity\Actor;
+use App\Entity\Season;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProgramRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
+#[Vich\Uploadable] 
 class Program
 {
     #[ORM\Id]
@@ -44,6 +50,16 @@ class Program
 
     #[ORM\Column(length: 255)]
     private ?string $slug;
+
+    #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
+    #[Assert\File(
+        maxSize: '1M',
+        mimeTypes: ['image/jpg', 'image/jpeg', 'image.png', 'image/webp'],
+    )]
+    private ?File $posterFile = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?Datetime $updatedAt = null;
 
     public function __construct()
     {
@@ -175,6 +191,19 @@ class Program
         $this->slug = $slug;
 
         return $this;
+    }
+    public function setPosterFile(File $image = null): Program
+    {
+        $this->posterFile = $image;
+        if($image) {
+            $this->updatededAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->posterFile;
     }
     
 }

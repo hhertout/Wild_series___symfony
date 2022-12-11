@@ -1,0 +1,30 @@
+<div class="row g-3">
+    {% for actor in actors %}
+        <div class="col-12 col-md-6 col-xl-4">
+
+            <div class="card-film text-dark py-5 h-100 d-flex flex-column flex-between">
+            
+                
+                <div class="card-title-wrapper d-flex align-items-center bg-primary container-fluid p-0 m-0 mt-3">
+                    {% if vich_uploader_asset(actor) %}
+                        <img src="{{ vich_uploader_asset(actor) }}" alt="{{ actor.name }}" class="card-img">
+                    {% else %}
+                        <img src="{{ asset('build/images/placeholder.jpg') }}" alt="{{ actor.name }}" class="card-img">
+                    {% endif %}
+                    <h3 class="fs-2 p-3">{{ actor.name }}</h3>
+                </div>
+
+                
+
+                <a href="{{ path("actor_show", { slug: actor.slug }) }}" class="card-show-more text-dark mb-3 align-self-end p-2 px-3 mt-3 me-2 d-flex align-items-center">
+                    <span class="me-2 fs-4">Voir la fiche</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                        <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                    </svg>
+                </a>
+            </div>
+            
+        </div>
+
+    {% endfor %}
+</div>

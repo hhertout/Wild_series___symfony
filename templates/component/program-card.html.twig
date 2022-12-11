@@ -6,7 +6,11 @@
             
                 
                 <div class="card-title-wrapper d-flex align-items-center bg-primary container-fluid p-0 m-0 mt-3">
-                    <img src="{{ program.poster ?? asset('build/images/got.jpg') }}" alt="placeholder" class="card-img">
+                    {% if vich_uploader_asset(program) %}
+                        <img src="{{ vich_uploader_asset(program) }}" alt="{{program.title}}" class="card-img">
+                    {% else %}
+                        <img src="{{ asset('build/images/got.jpg') }}" alt="{{program.title}}" class="card-img">
+                    {% endif %}
                     <h3 class="fs-2 p-3">{{ program.title }}</h3>
                 </div>
             

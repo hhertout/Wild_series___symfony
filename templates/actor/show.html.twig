@@ -7,13 +7,26 @@
 {% block body %}
 <div class="container-xxl p-4">
     <div class="bg-primary p-4">
-    <div class="text-subtitle fs-1">
-        <span>{{actor.name}}</span>
-    </div>
-    <div class="text-subtitle fs-3">Série :</div>
-    {% for program in actor.programs %}
-        <a class="link-seasons text-dark p-2" href={{ path('program_list',{ id: program.id }) }}>{{program.title}}</div>
-    {% endfor %}
+    <div class="d-flex justify-content-center align-items-center bg-primary">
+            {% if vich_uploader_asset(actor) %}
+                <img class="w-50 align-self-start mr-3" src="{{ vich_uploader_asset(actor) }}" alt="{{ actor.name }}" class="card-img">
+            {% else %}
+                <img class="w-50 align-self-start mr-3" src="{{ asset('build/images/placeholder.jpg') }}" alt="{{ actor.name }}" class="card-img">
+            {% endif %}
+            <h4 class="w-50 mt-0 text-dark p-3">{{ actor.name }}</h4>
+        </div>
+    <div>
+    <div class="text-subtitle bg-light">
+        <div>Présent dans les séries :</div>
+        <div>
+            {% if actor.programs is not empty %}
+            {% for program in actor.programs %}
+                <a class="link-seasons text-dark p-2" href="{{ path("program_list", {"slug": program.slug, "program": program.slug })}}">{{program.title}}</a>
+            {% endfor %}
+            {% else %}
+                <div>Présent dans aucune série disponible</div>
+            {% endif %}
+        </div>
     </div>
 </div>    
 {% endblock %}
