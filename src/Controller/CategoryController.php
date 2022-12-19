@@ -10,10 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class CategoryController extends AbstractController
 {
     #[Route('/category/new', name: 'category_new')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(CategoryRepository $categoryRepository, Request $request): Response
     {
         $categories = $categoryRepository->findAll();

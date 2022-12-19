@@ -18,9 +18,8 @@
             </div>
             <div>
                 <p class="text-subtitle fs-3">Synopsis:</p>
-                <p class="">{{ episode.synopsis }}</p>       
+                <p class="">{{ episode.synopsis }}</p>   
             </div>
-            
         </div> 
         
     
@@ -39,8 +38,17 @@
             <div class="text-subtitle fs-2">Commentaires :</div>
             {% for comment in comments|sort((a, b) => b.creationDate <=> a.creationDate) %}
             <div class="bg-dark text-light p-2 my-4 rounded">
+                <p class="blockquote">{{ 'Note : ' ~ comment.rate}}</p>
                 <p class="blockquote">{{comment.comment}}</p>
                 <div class="blockquote-footer text-primary">{{comment.author.firstname}} {{comment.author.lastname}}</div>
+
+                {% if is_granted("ROLE_ADMIN") or app.user.id == comment.author.id %}
+                    <form method="post" action="{{ path('comment_delete', {'slug': program.slug, 'season': season.id , 'comment': comment.id, 'episode': episode.id }) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                        <button class="btn bg-primary text-subtitle my-2 p-3">Supprimer</button>
+                    </form>
+                {% endif %}
+
             </div>
             {% endfor %}
         </div>   

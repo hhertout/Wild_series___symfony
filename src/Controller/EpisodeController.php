@@ -147,4 +147,26 @@ class EpisodeController extends AbstractController
         }
         return $this->redirectToRoute('app_episode_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{slug}/season-show/{season}/{episode}/{comment}', name: 'comment_delete', methods: ['POST'])]
+    public function Commentarydelete(
+        Request $request, 
+        Comment $comment, 
+        Episode $episode,
+        Program $program,
+        Season $season,
+        CommentRepository $commentRepository,
+        ): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+            $commentRepository->remove($comment, true);
+
+            $this->addFlash('danger', 'Le commentaire à bien été supprimé');
+        }
+        return $this->redirectToRoute('episode_show', [
+            'episode' => $episode->getId(),
+            'season' => $season->getId(),
+            'slug' => $program->getSlug(),
+        ]);
+    }
 }

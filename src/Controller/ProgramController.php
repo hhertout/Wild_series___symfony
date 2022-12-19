@@ -57,6 +57,7 @@ class ProgramController extends AbstractController
         if ($form->isSubmitted()) {
             $slug = $slugger->slug($program->getTitle());
             $program->setSlug($slug);
+            $program->setOwner($this->getUser());
             $programRepository->save($program, true);
 
             $email = (new Email())
