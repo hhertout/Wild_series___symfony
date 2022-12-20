@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 #[Route('/program')]
 class ProgramController extends AbstractController
@@ -25,14 +26,25 @@ class ProgramController extends AbstractController
         ProgramRepository $programRepository, 
         CategoryRepository $categoryRepository,
         RequestStack $requestStack,
+        Request $request
         ): Response
     {
         $requestStack->getSession();
         $categories = $categoryRepository->findAll();
-        $programs = $programRepository->findAll();
+        
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
 
-        return $this->render('program/index.html.twig', [
+        if($form->isSubmitted()){
+            $search = $form->getData();
+            $programs = $programRepository->findLikeName($search);
+        } else {
+            $programs = $programRepository->findAll();
+        }
+
+        return $this->renderForm('program/index.html.twig', [
             'programs' => $programs,
+            'form' => $form,
             'categories' => $categories
         ]);
     }

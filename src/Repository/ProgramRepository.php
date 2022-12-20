@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Program;
+use App\Entity\Actor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,18 @@ class ProgramRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+    public function findLikeName(string $name)
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+        ->where('p.title LIKE :name')
+        ->orderBy('p.title', 'ASC')
+        ->join('p.actors', 'a')
+        ->orWhere('a.name LIKE :name')
+        ->setParameter('name', '%' . $name . '%')
+        ->getQuery();
+
+        return $queryBuilder->getResult();
     }
 
 //    /**

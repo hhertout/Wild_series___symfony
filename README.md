@@ -23,9 +23,10 @@
 - Upload de media avec Vish Upload
 - Gestion des utilisateurs et des différents rôles
 - Sécurisation des routes
+- Requêtes personnalisées
 
 (à venir)
-- Requêtes personnalisées
+
 - Watchlist
 - Watchlist avec AJAX,
 - Internationalisation
