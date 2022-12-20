@@ -30,3 +30,4 @@
 - Watchlist avec AJAX,
 - Internationalisation
 - Embedding Controller
+- Intégrer Three.js ??
