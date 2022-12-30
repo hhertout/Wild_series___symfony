@@ -11,7 +11,7 @@
                     {% else %}
                         <img src="{{ asset('build/images/got.jpg') }}" alt="{{program.title}}" class="card-img">
                     {% endif %}
-                    <h3 class="fs-2 p-3">{{ program.title }}</h3>
+                    <h3 class="fs-2 p-3"><a class="nav-link" href="{{ path("program_list", { slug: program.slug }) }}">{{ program.title }}</a></h3>
                 </div>
             
                 <div class="mt-2 p-3 h-50">

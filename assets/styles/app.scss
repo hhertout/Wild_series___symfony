@@ -45,6 +45,15 @@ a {
     object-fit: cover;
 }
 
+i{
+    color: $terciary;
+    &:hover{
+        scale: 1.2;
+        width: 70px;
+        height: 70px;
+    }
+}
+
 .custom-link{
     width: 15rem;
     clip-path: polygon(5% 0, 95% 0, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0 95%, 0 5%);

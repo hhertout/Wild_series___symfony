@@ -13,9 +13,17 @@
         </div>
 
         <div class="p-4">
-            <div>
-                <p class="text-subtitle fs-2">Catégorie : {{ program.category.name }}</p>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <p class="text-subtitle fs-2">Catégorie : {{ program.category.name }}</p>
+                </div>
+                <div class="mt-3">
+                    <a href="{{ path('program_watchlist', {slug: program.slug})}}">
+                        <i class="bi {{ app.user.isInWatchlist(program) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+                    </a>
+                </div>
             </div>
+            
             <div>
                 <p class="text-subtitle fs-3">Synopsis:</p>
                 <p class="">{{ program.synopsis }}</p>
@@ -44,6 +52,7 @@
                 <p class="text-subtitle fs-3">Durée totale de la série :</p>
                 <p>{{ programDuration }}</p>
             </div>
+            
         </div>    
     
     </div>
